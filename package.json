@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "author": "",
+  "author": "Pippa-Jade",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2"
