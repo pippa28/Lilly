@@ -1,14 +1,33 @@
+// Function to add a rotating class to the spinner
+function startSpinnerRotation() {
+    const spinner = document.querySelector('.spinner');
+    spinner.classList.add('rotating');
+}
+
+// Fetch the list of stocks from the backend using XMLHttpRequest
+function fetchStocks() {
+    const xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log('List of available stocks:', JSON.parse(xhr.responseText).stockSymbols);
+            } else {
+                console.error('Error fetching stocks. Status:', xhr.status);
+            }
+        }
+    };
+
+    xhr.open('GET', '/stocks', true);
+    xhr.send();
+}
+
+
+//For drawing on canvas
 const canvas = document.getElementById('chart')
 const ctx = canvas.getContext('2d')
 
-// Function to add a rotating class to the spinner
-function startSpinnerRotation() {
-  const spinner = document.querySelector('.spinner');
-  spinner.classList.add('spinner');
-  console.log('Spinner rotating class added');
-}
 
-function drawLine (start, end, style) {
+function drawLine(start, end, style) {
   ctx.beginPath()
   ctx.strokeStyle = style || 'black'
   ctx.moveTo(...start)
@@ -24,12 +43,15 @@ function drawTriangle (apex1, apex2, apex3) {
   ctx.fill()
 }
 
+//Drawing on canvas
 drawLine([50, 50], [50, 550])
 drawTriangle([35, 50], [65, 50], [50, 35])
 
 drawLine([50, 550], [950, 550])
 drawTriangle([950, 535], [950, 565], [965, 550])
 
-// Start rotating the spinner after a delay
+// Start rotating the spinner after a slight  delay
 setTimeout(startSpinnerRotation, 1000);
 
+//Fetch list of stocks after a slight delay
+setTimeout(fetchStocks, 1000);
