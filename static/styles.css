@@ -3,13 +3,13 @@
   position: relative;
 }
 
-.rotating:after {
+.spinner:after {
   content: '◌';
   display: inline-block;
-  animation: rotateInfinitely 2s linear infinite;
+  animation: rotateInfinite 2s linear infinite;
 }
 
-@keyframes rotateInfinitely {
+@keyframes rotateInfinite {
   from {
     transform: rotate(0deg);
   }

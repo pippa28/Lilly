@@ -4,7 +4,7 @@ const ctx = canvas.getContext('2d')
 // Function to add a rotating class to the spinner
 function startSpinnerRotation() {
   const spinner = document.querySelector('.spinner');
-  spinner.classList.add('rotating');
+  spinner.classList.add('spinner');
   console.log('Spinner rotating class added');
 }
 
