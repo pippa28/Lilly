@@ -1,10 +1,19 @@
 .spinner{
   font-size: 140px;
-}
-.spinner:after {
-  content: '◌';
+  position: relative;
 }
 
-#chart {
-    border: 1px solid black;
+.rotating:after {
+  content: '◌';
+  display: inline-block;
+  animation: rotateInfinitely 2s linear infinite;
+}
+
+@keyframes rotateInfinitely {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
