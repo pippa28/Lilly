@@ -4,7 +4,7 @@ function startSpinnerRotation() {
     spinner.classList.add('rotating');
 }
 
-// Fetch the list of stocks from the backend using XMLHttpRequest
+//Function to  fetch the list of stocks from the backend using XMLHttpRequest
 function fetchStocks() {
     const xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
@@ -21,6 +21,32 @@ function fetchStocks() {
     xhr.send();
 }
 
+//Function to fetch data for each stock
+function fetchStockData(stockSymbols) {
+    stockSymbols.forEach(stockSymbol => {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                try {
+                    if (xhr.status === 200) {
+                        const stockData = JSON.parse(xhr.responseText);
+                        console.log(`Data for ${stockSymbol}:`, stockData);
+                    } else {
+                        handleError(stockSymbol, xhr.status);
+                    }
+                } catch (error) {
+                    handleError(stockSymbol, `Parsing Error: ${error}`);
+                }
+
+                // Check if all data is loaded and hide the spinner
+                checkAndHideSpinner(stockSymbols, stockSymbol);
+            }
+        };
+
+        xhr.open('GET', `/stocks/${stockSymbol}`, true);
+        xhr.send();
+    });
+}
 
 //For drawing on canvas
 const canvas = document.getElementById('chart')
